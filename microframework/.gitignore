@@ -1,0 +1,29 @@
+# llaves privadas
+*.pem
+
+# carpeta de compilación Maven
+target/
+
+# archivos de sistema
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# logs
+*.log
+
+# variables de entorno
+.env
+
+# archivos temporales
+*.tmp
+*.swp
+
+# node (por si acaso)
+node_modules/
+
+# archivos de configuración de IDE
+.idea/
+*.iml
