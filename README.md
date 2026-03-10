@@ -1,4 +1,4 @@
-# Mini Web Framework en Java desplegado en AWS EC2
+# Mini Web Framework en Java desplegado en AWS EC2 - Felipe Calvache
 
 ## Descripción
 
@@ -42,27 +42,41 @@ Framework → Controllers → Response
 ## Estructura del Proyecto
 
 ```
-microframework
+TDSE-ServidorWebDesplegado
 │
-├── src
-│   └── main
-│       └── java
-│           └── co.edu.escuelaing
-│               ├── annotations
-│               │   ├── GetMapping.java
-│               │   ├── RequestParam.java
-│               │   └── RestController.java
-│               │
-│               ├── controllers
-│               │   ├── GreetingController.java
-│               │   └── HelloController.java
-│               │
-│               │── server
-│               │   └── HttpServer.java
-|               └── MicroSpringBoot.java
+├── deployment
+│   ├── classes.zip
+│   └── myKey.pem
 │
-├── README.md
-└── pom.xml
+├── microframework
+│   │
+│   ├── imagenes
+│   │
+│   ├── src
+│   │   └── main
+│   │       └── java
+│   │           └── co
+│   │               └── edu
+│   │                   └── escuelaing
+│   │                       ├── annotations
+│   │                       │   ├── GetMapping.java
+│   │                       │   ├── RequestParam.java
+│   │                       │   └── RestController.java
+│   │                       │
+│   │                       ├── controllers
+│   │                       │   ├── GreetingController.java
+│   │                       │   └── HelloController.java
+│   │                       │
+│   │                       ├── server
+│   │                       │   └── HttpServer.java
+│   │                       │
+│   │                       └── MicroSpringBoot.java
+│   │
+│   ├── target
+│   ├── .gitignore
+│   └── pom.xml
+│
+└── README.md
 ```
 
 ---
@@ -90,8 +104,9 @@ Ejemplo de controlador implementado:
 public class GreetingController {
 
     @GetMapping("/greeting")
-    public String greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return "Hola " + name;
+    public String greeting(
+        @RequestParam(value = "name", defaultValue = "World") String name) {
+        return "<h1>Hola, " + name + "!</h1>";
     }
 }
 ```
@@ -99,13 +114,13 @@ public class GreetingController {
 Ejemplo de uso desde el navegador:
 
 ```
-http://ec2-3-235-188-92.compute-1.amazonaws.com:8080/greeting?name=Kevin
+http://ec2-@IP_PUBLICA.compute-1.amazonaws.com:8080/greeting?name=Felipe
 ```
 
 Respuesta:
 
 ```
-Hola Kevin
+Hola Felipe
 ```
 
 ---
@@ -129,14 +144,14 @@ zip -r classes.zip classes
 3. Transferencia del archivo al servidor mediante **SFTP**.
 
 ```
-sftp -i myKey.pem ec2-user@ec2-3-235-188-92.compute-1.amazonaws.com
-put classes.zip
+sftp -i myKey.pem ec2-user@ec2-@IP_PUBLICA.compute-1.amazonaws.com
+sftp> put classes.zip
 ```
 
 4. Conexión a la instancia mediante **SSH**.
 
 ```
-ssh -i myKey.pem ec2-user@ec2-3-235-188-92.compute-1.amazonaws.com
+ssh -i myKey.pem ec2-user@ec2-@IP_PUBLICA.compute-1.amazonaws.com
 ```
 
 5. Instalación de Java en la instancia.
@@ -148,7 +163,7 @@ sudo yum install java-21-amazon-corretto-devel
 6. Ejecución del servidor.
 
 ```
-java -cp classes co.edu.escuelaing.server.MicroSpringBoot
+java -cp classes co.edu.escuelaing.MicroSpringBoot
 ```
 
 7. Apertura del puerto correspondiente en el **Security Group** para permitir acceso externo.
@@ -159,25 +174,30 @@ java -cp classes co.edu.escuelaing.server.MicroSpringBoot
 
 ### Compilación del proyecto
 
-📸 *(Insertar captura aquí)*
+![alt text](/microframework/imagenes/image-4.png)
 
 ---
 
-### Transferencia de archivos a EC2
+### Transferencia de archivos a EC2 y configuración de puertos
 
-📸 *(Insertar captura aquí)*
+![alt text](/microframework/imagenes/image-6.png)
 
+![alt text](/microframework/imagenes/image-5.png)
 ---
 
 ### Ejecución del servidor en EC2
 
-📸 *(Insertar captura aquí)*
+![alt text](/microframework/imagenes/image-7.png)
 
 ---
 
 ### Acceso al servicio desde el navegador
 
-📸 *(Insertar captura aquí)*
+![alt text](/microframework/imagenes/image-8.png)
+
+![alt text](/microframework/imagenes/image-9.png)
+
+![alt text](/microframework/imagenes/image-10.png)
 
 ---
 
