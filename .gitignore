@@ -1,5 +1,6 @@
 # llaves privadas
 *.pem
+deployment/*.pem
 
 # carpeta de compilación Maven
 target/

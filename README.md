@@ -73,9 +73,9 @@ TDSE-ServidorWebDesplegado
 │   │                       └── MicroSpringBoot.java
 │   │
 │   ├── target
-│   ├── .gitignore
 │   └── pom.xml
 │
+├── .gitignore
 └── README.md
 ```
 
